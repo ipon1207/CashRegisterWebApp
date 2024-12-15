@@ -13,6 +13,7 @@ public class EditService {
     @Autowired
     GroupRepository groupRepository;
 
+    // Groups テーブルの全件取得
     public List<Group> searchAll()  {
 
         List<Group> result;
@@ -26,5 +27,39 @@ public class EditService {
         }
 
         return result;
+    }
+
+    // Groups テーブルを groupId で1件取得
+    public Group searchOne(Integer groupId) {
+
+        Group result;
+
+        result = groupRepository.findByGroupId(groupId);
+
+        // 実行結果の検証
+        if (result == null) {
+            System.out.println("Group is Not Found");
+            throw new IllegalArgumentException("Group is Not Found");
+        }
+
+        return result;
+
+    }
+
+    // Group テーブルの1件変更
+    public void updateOne(Group group) {
+
+        Group existingGroup;
+
+        // 既存のデータを上書き
+        existingGroup = groupRepository.findByGroupId(group.getGroupId());
+        existingGroup.setGroupName(group.getGroupName());
+        existingGroup.setMail(group.getMail());
+        existingGroup.setPassword(group.getPassword());
+        existingGroup.setRole(group.getRole());
+        existingGroup.setCreatedAt(group.getCreatedAt());
+
+        groupRepository.save(existingGroup);
+
     }
 }

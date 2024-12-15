@@ -74,7 +74,7 @@
             <th>団体名</th>
             <th>メールアドレス</th>
             <th>権限</th>
-            <th>作成日時</th>
+            <th>作成/更新日時</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -85,7 +85,7 @@
             <td th:text="${group.role}"></td>
             <td th:text="${group.createdAt}"></td>
             <td>
-                <form method="post" th:action="@{/edit}">
+                <form method="post" th:action="@{/admin/viewGroupEdit}">
                     <input type="hidden" name="id" th:value="${group.groupId}" />
                     <button type="submit" class="edit-button">編集</button>
                 </form>

@@ -10,4 +10,7 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
     // mail で1件取得
     public Group findByMail(String mail);
 
+    // groupId で1件取得
+    public Group findByGroupId(Integer groupId);
+
 }

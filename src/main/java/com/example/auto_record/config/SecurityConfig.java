@@ -43,8 +43,9 @@ public class SecurityConfig {
                         .requestMatchers("/main")
                         .hasAnyRole("USER","ADMIN")
                         // admin.htmlの参照権限
-                        .requestMatchers("/admin")
-                        .hasRole("ADMIN"));
+                        .requestMatchers("/admin/**")
+                        .hasRole("ADMIN")
+                );
 
         return http.build();
     }

@@ -1,7 +1,7 @@
-package com.example.auto_record.controller;
+package com.example.auto_record.controller.group;
 
 import com.example.auto_record.model.Group;
-import com.example.auto_record.service.GroupService;
+import com.example.auto_record.service.group.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,32 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 
+/* Group の新規登録 Controller */
 @Controller
-public class GroupController {
+public class RegisterController {
 
     @Autowired
-    GroupService groupService;
+    RegisterService registerService;
 
     // ハッシュ化を行うためのオブジェクト
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-
-    // login.htmlに遷移
-    @GetMapping("/toLogin")
-    public String getLogin() {
-        return "login";
-    }
-
-    // main.html に遷移
-    @GetMapping("/main")
-    public String getMain(){
-        return "main";
-    }
-
-    // admin.html に遷移
-    @GetMapping("/admin")
-    public String getAdmin(){
-        return "admin";
-    }
 
     // register.html に遷移
     @GetMapping("/admin/viewRegister")
@@ -56,7 +39,7 @@ public class GroupController {
         registerGroup.setCreatedAt(LocalDateTime.now());
 
         // DBに追加
-        groupService.register(registerGroup);
+        registerService.register(registerGroup);
 
         model.addAttribute("loginGroup", new Group());
         return "login";

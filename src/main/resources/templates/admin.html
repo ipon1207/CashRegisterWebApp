@@ -10,6 +10,9 @@
     <body>
         <h1>admin.html</h1>
         <a href="./main.html" th:href="@{/}">ユーザーページ</a><br>
+        <form th:action="@{/admin/viewGroupList}" method="get">
+            <button type="submit">グループ一覧</button>
+        </form>
         <form th:action="@{/admin/viewRegister}" method="get">
             <button type="submit">グループ新規登録</button>
         </form>

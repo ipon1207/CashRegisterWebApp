@@ -82,11 +82,11 @@
             <td th:text="${product.productValue}"></td>
             <td th:text="${product.createdAt}"></td>
             <td>
-                <form method="get" th:action="@{/main/viewProductList/editProduct}">
+                <form method="post" th:action="@{/main/productList/viewEditProduct}">
                     <input type="hidden" name="id" th:value="${product.productId}" />
                     <button type="submit" class="edit-button">編集</button>
                 </form>
-                <form method="post" th:action="@{/deleteProduct}">
+                <form method="post" th:action="@{/main/productList/deleteProduct}">
                     <input type="hidden" name="id" th:value="${product.productId}" />
                     <button type="submit" class="delete-button" onclick="return confirmDelete();">削除</button>
                 </form>

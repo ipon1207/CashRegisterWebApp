@@ -15,10 +15,14 @@ public class GroupPrincipal implements UserDetails {
     // groupId を返す
     @Getter
     private final Integer groupId;
+    // groupName を返す
+    @Getter
+    private final String groupName;
 
     public GroupPrincipal(Group group) {
         this.group = group;
         this.groupId = group.getGroupId();
+        this.groupName = group.getGroupName();
         this.authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_" + group.getRole()));
     }
 

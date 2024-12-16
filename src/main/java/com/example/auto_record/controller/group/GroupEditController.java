@@ -22,9 +22,6 @@ public class GroupEditController {
     @Autowired
     GroupEditService groupEditService;
 
-    // ハッシュ化を行うためのオブジェクト
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-
     // グループ一覧画面へ遷移
     @GetMapping("/admin/viewGroupList")
     public String getViewGroupList(Model model) {
@@ -58,10 +55,6 @@ public class GroupEditController {
 
         List<Group> groupList;
 
-        // 入力された password をハッシュ化
-        editGroup.setPassword(encoder.encode(editGroup.getPassword()));
-        // createdAt を現在日時に set
-        editGroup.setCreatedAt(LocalDateTime.now());
         // グループ情報を変更
         groupEditService.updateOne(editGroup);
         // グループ情報を全件取得

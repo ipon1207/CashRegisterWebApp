@@ -4,6 +4,7 @@ import com.example.auto_record.model.Group;
 import com.example.auto_record.repository.group.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -60,6 +61,14 @@ public class EditService {
         existingGroup.setCreatedAt(group.getCreatedAt());
 
         groupRepository.save(existingGroup);
+
+    }
+
+    // Group テーブルの1件削除
+    @Transactional
+    public void deleteOne(Integer groupId) {
+
+        groupRepository.deleteByGroupId(groupId);
 
     }
 }

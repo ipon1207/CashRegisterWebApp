@@ -13,4 +13,7 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
     // groupId で1件取得
     public Group findByGroupId(Integer groupId);
 
+    // groupId で1件削除
+    public void deleteByGroupId(Integer groupId);
+
 }

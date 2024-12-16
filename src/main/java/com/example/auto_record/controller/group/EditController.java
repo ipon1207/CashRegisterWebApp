@@ -72,4 +72,21 @@ public class EditController {
         return "groupList";
     }
 
+    // グループ情報を削除
+    @PostMapping("/admin/delete")
+    public String postDelete(@RequestParam("id") Integer deleteId, Model model) {
+
+        List<Group> groupList;
+
+        // グループ情報を削除
+        editService.deleteOne(deleteId);
+        // グループ情報を全件取得
+        groupList = editService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getGroupId));
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+
+    }
+
 }

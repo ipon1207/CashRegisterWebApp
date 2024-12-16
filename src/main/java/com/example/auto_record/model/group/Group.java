@@ -1,4 +1,4 @@
-package com.example.auto_record.model;
+package com.example.auto_record.model.group;
 
 import jakarta.persistence.*;
 import lombok.Data;

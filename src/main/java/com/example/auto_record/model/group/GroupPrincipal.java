@@ -1,4 +1,4 @@
-package com.example.auto_record.model;
+package com.example.auto_record.model.group;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

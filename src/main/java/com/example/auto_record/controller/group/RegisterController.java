@@ -1,6 +1,6 @@
 package com.example.auto_record.controller.group;
 
-import com.example.auto_record.model.Group;
+import com.example.auto_record.model.group.Group;
 import com.example.auto_record.service.group.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

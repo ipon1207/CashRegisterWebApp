@@ -41,7 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/")
                         .permitAll()
                         // main.htmlの参照権限
-                        .requestMatchers("/main")
+                        .requestMatchers("/main/**")
                         .hasAnyRole("USER", "ADMIN")
                         // admin.htmlの参照権限
                         .requestMatchers("/admin/**")

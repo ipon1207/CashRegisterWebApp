@@ -1,5 +1,6 @@
 package com.example.auto_record.model.group;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +12,13 @@ public class GroupPrincipal implements UserDetails {
 
     private final Group group;
     private final Collection<GrantedAuthority> authorities;
+    // groupId を返す
+    @Getter
+    private final Integer groupId;
 
     public GroupPrincipal(Group group) {
         this.group = group;
+        this.groupId = group.getGroupId();
         this.authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_" + group.getRole()));
     }
 
@@ -58,4 +63,5 @@ public class GroupPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

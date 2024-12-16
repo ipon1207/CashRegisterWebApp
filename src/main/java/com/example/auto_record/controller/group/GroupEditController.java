@@ -1,7 +1,7 @@
 package com.example.auto_record.controller.group;
 
 import com.example.auto_record.model.group.Group;
-import com.example.auto_record.service.group.EditService;
+import com.example.auto_record.service.group.GroupEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,10 +17,10 @@ import java.util.List;
 
 /* グループの編集機能 Controller */
 @Controller
-public class EditController {
+public class GroupEditController {
 
     @Autowired
-    EditService editService;
+    GroupEditService groupEditService;
 
     // ハッシュ化を行うためのオブジェクト
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -32,7 +32,7 @@ public class EditController {
         List<Group> groupList;
 
         // グループ一覧を取得
-        groupList = editService.searchAll();
+        groupList = groupEditService.searchAll();
         // グループ一覧の並び替え
         groupList.sort(Comparator.comparing(Group::getGroupId));
 
@@ -46,7 +46,7 @@ public class EditController {
 
         Group editGroup;
 
-        editGroup = editService.searchOne(editId);
+        editGroup = groupEditService.searchOne(editId);
 
         model.addAttribute("editGroup", editGroup);
         return "groupEdit";
@@ -63,9 +63,9 @@ public class EditController {
         // createdAt を現在日時に set
         editGroup.setCreatedAt(LocalDateTime.now());
         // グループ情報を変更
-        editService.updateOne(editGroup);
+        groupEditService.updateOne(editGroup);
         // グループ情報を全件取得
-        groupList = editService.searchAll();
+        groupList = groupEditService.searchAll();
         groupList.sort(Comparator.comparing(Group::getGroupId));
 
         model.addAttribute("groupList", groupList);
@@ -79,9 +79,9 @@ public class EditController {
         List<Group> groupList;
 
         // グループ情報を削除
-        editService.deleteOne(deleteId);
+        groupEditService.deleteOne(deleteId);
         // グループ情報を全件取得
-        groupList = editService.searchAll();
+        groupList = groupEditService.searchAll();
         groupList.sort(Comparator.comparing(Group::getGroupId));
 
         model.addAttribute("groupList", groupList);

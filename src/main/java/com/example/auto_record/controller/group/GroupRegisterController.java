@@ -1,7 +1,7 @@
 package com.example.auto_record.controller.group;
 
 import com.example.auto_record.model.group.Group;
-import com.example.auto_record.service.group.RegisterService;
+import com.example.auto_record.service.group.GroupRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 
 /* Group の新規登録 Controller */
 @Controller
-public class RegisterController {
+public class GroupRegisterController {
 
     @Autowired
-    RegisterService registerService;
+    GroupRegisterService groupRegisterService;
 
     // ハッシュ化を行うためのオブジェクト
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -39,7 +39,7 @@ public class RegisterController {
         registerGroup.setCreatedAt(LocalDateTime.now());
 
         // DBに追加
-        registerService.register(registerGroup);
+        groupRegisterService.register(registerGroup);
 
         model.addAttribute("loginGroup", new Group());
         return "login";

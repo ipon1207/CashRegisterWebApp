@@ -1,4 +1,4 @@
-package com.example.auto_record.repository.group;
+package com.example.auto_record.repository;
 
 import com.example.auto_record.model.group.Group;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.example.auto_record.repository.product;
+package com.example.auto_record.repository;
 
 import com.example.auto_record.model.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

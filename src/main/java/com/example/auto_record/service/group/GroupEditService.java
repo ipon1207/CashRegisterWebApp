@@ -1,7 +1,7 @@
 package com.example.auto_record.service.group;
 
 import com.example.auto_record.model.group.Group;
-import com.example.auto_record.repository.group.GroupRepository;
+import com.example.auto_record.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

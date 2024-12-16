@@ -1,7 +1,7 @@
 package com.example.auto_record.service.product;
 
 import com.example.auto_record.model.product.Product;
-import com.example.auto_record.repository.product.ProductRepository;
+import com.example.auto_record.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

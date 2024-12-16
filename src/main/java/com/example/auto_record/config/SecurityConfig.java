@@ -31,8 +31,9 @@ public class SecurityConfig {
                         // login.htmlをログインページに設定
                         .loginPage("/toLogin")
                         // 認証成功時はmain.htmlへ遷移
-                        .defaultSuccessUrl("/main")
-                        .permitAll())
+                        .defaultSuccessUrl("/main", true)
+                        .permitAll()
+                )
 
                 /* リクエストの許可設定 */
                 .authorizeHttpRequests(authz -> authz
@@ -41,10 +42,17 @@ public class SecurityConfig {
                         .permitAll()
                         // main.htmlの参照権限
                         .requestMatchers("/main")
-                        .hasAnyRole("USER","ADMIN")
+                        .hasAnyRole("USER", "ADMIN")
                         // admin.htmlの参照権限
                         .requestMatchers("/admin/**")
                         .hasRole("ADMIN")
+                )
+
+                /* ログアウトの設定 */
+                .logout(logout -> logout
+                        // ログアウト後にログインページへリダイレクト
+                        .logoutSuccessUrl("/toLogin")
+                        .permitAll()
                 );
 
         return http.build();

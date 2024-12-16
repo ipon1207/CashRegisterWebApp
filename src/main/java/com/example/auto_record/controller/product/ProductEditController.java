@@ -1,7 +1,7 @@
 package com.example.auto_record.controller.product;
 
-import com.example.auto_record.model.group.GroupPrincipal;
-import com.example.auto_record.model.product.Product;
+import com.example.auto_record.model.GroupPrincipal;
+import com.example.auto_record.model.Product;
 import com.example.auto_record.service.product.ProductEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

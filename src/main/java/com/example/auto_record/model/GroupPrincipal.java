@@ -1,4 +1,4 @@
-package com.example.auto_record.model.group;
+package com.example.auto_record.model;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

@@ -98,5 +98,8 @@
 <div th:if="${#lists.isEmpty(productList)}">
     <p>データがありません。</p>
 </div>
+<form method="get" th:action="@{/main/productList/viewRegister}">
+    <button type="submit">商品新規登録</button>
+</form>
 </body>
 </html>

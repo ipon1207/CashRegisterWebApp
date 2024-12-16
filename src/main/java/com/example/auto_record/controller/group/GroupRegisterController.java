@@ -26,7 +26,7 @@ public class GroupRegisterController {
     @GetMapping("/admin/viewRegister")
     public String getViewRegister(Model inputModel) {
         inputModel.addAttribute("registerGroup", new Group());
-        return "register";
+        return "groupRegister";
     }
 
     // Group の新規登録

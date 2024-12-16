@@ -13,5 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     public List<Product> findByGroupId(Integer groupId);
     // productId で合致するものを1件取得
     public Product findByProductId(Integer productId);
+    // productId で合致するものを1件削除
+    public void deleteByProductId(Integer productId);
 
 }

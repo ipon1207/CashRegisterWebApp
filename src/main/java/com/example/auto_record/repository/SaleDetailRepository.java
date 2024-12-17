@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SaleDetailRepository extends JpaRepository<SaleDetail, Integer> {
+
+    // saleId に合致するものを全件削除
+    public void deleteBySaleId(Integer saleId);
+
 }

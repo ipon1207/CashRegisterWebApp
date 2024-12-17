@@ -155,7 +155,7 @@
                     <input type="hidden" name="id" th:value="${sale.saleId}" />
                     <button type="submit" class="edit-button">詳細</button>
                 </form>
-                <form method="post" th:action="@{/admin/saleList/delete}">
+                <form method="post" th:action="@{/main/saleList/delete}">
                     <input type="hidden" name="id" th:value="${sale.saleId}" />
                     <button type="submit" class="delete-button" onclick="return confirmDelete();">削除</button>
                 </form>

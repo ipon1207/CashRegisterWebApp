@@ -16,4 +16,6 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
     public Sale findBySaleId(Integer saleId);
     // groupId で合致するものを全件取得
     public List<Sale> findByGroupId(Integer groupId);
+    // saleId で合致するものを削除
+    public void deleteBySaleId(Integer saleId);
 }

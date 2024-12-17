@@ -56,9 +56,29 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        /* 団体一覧に戻るボタン */
+        .back-button {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
+<!-- 団体一覧画面に戻るボタン -->
+<a th:href="@{/main/groupEdit}" class="back-button">&larr; 団体一覧に戻る</a>
 <h1>ユーザー編集</h1>
 <form method="post" th:action="@{/admin/groupEdit}" th:object="${editGroup}">
     <input type="hidden" th:field="*{groupId}" required/>

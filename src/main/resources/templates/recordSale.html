@@ -1,9 +1,172 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <title>取引記録システム</title>
+    <style>
+        /* 全体のスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* コンテナ */
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 2.5em; /* スマホ画面でも大きく表示 */
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 2em; /* スマホ画面でも大きく表示 */
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        /* ボタンスタイル */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 2em; /* ボタンのフォントサイズを大きく */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 商品ボタン（電卓風） */
+        .product-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* 合計金額・受領金額・お釣り */
+        .amount-display {
+            font-size: 3em; /* 合計金額・受領金額を大きく表示 */
+            color: #28a745;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* 入力ボタン（電卓風） */
+        .input-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .input-buttons button {
+            font-size: 3em; /* 入力ボタンのフォントサイズを大きく */
+            padding: 30px;
+        }
+
+        /* 受領金額クリアボタン */
+        .clear-button {
+            background-color: #dc3545;
+        }
+
+        .clear-button:hover {
+            background-color: #bd2130;
+        }
+
+        /* 販売データリスト */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* 登録ボタン */
+        .register-button {
+            width: 100%;
+            background-color: #28a745;
+            margin-top: 20px;
+            font-size: 2.5em; /* 登録ボタンのフォントサイズを大きく */
+        }
+
+        .register-button:hover {
+            background-color: #218838;
+        }
+
+        /* メイン画面に戻るボタンのスタイル */
+        .back-button {
+            position: fixed;
+            bottom: 20px; /* 左下に配置 */
+            left: 20px;   /* 左端から20pxの位置に配置 */
+            background-color: #28a745;
+            color: white;
+            padding: 15px 25px; /* ボタンを大きく */
+            border-radius: 10px; /* 角を丸く */
+            text-decoration: none;
+            font-size: 2em; /* フォントサイズを大きく */
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+        /* スマホ対応のレスポンシブデザイン */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 3em; /* スマホ画面でタイトルを大きく */
+            }
+
+            h2 {
+                font-size: 2.5em; /* スマホ画面で見出しを大きく */
+            }
+
+            .amount-display {
+                font-size: 4em; /* 合計金額、受領金額、お釣りのフォントサイズをさらに大きく */
+            }
+
+            .input-buttons button,
+            .product-buttons button,
+            .register-button {
+                font-size: 3em; /* すべてのボタンを大きく */
+                padding: 25px;
+            }
+
+            .back-button {
+                font-size: 1.5em;
+                padding: 12px 16px;
+            }
+        }
+    </style>
     <script>
         // 初期化
         let totalAmount = 0; // 合計金額
@@ -15,40 +178,38 @@
             totalAmount += price;
             document.getElementById("totalAmount").innerText = "¥" + totalAmount;
 
-            // 販売データの更新
             if (!soldItems[productId]) {
                 soldItems[productId] = 0;
             }
             soldItems[productId]++;
             updateSoldItemsList();
-
-            updateChange(); // お釣りを更新
+            updateChange();
         }
 
-        // 受領金額を更新する関数
+        // 受領金額更新
         function addToReceived(digit) {
-            receivedAmount = receivedAmount * 10 + digit; // 数字を追加
+            receivedAmount = receivedAmount * 10 + digit;
             document.getElementById("receivedAmount").innerText = "¥" + receivedAmount;
-            updateChange(); // お釣りを更新
+            updateChange();
         }
 
-        // 受領金額をクリアする関数
+        // 受領金額クリア
         function clearReceived() {
             receivedAmount = 0;
             document.getElementById("receivedAmount").innerText = "¥0";
-            updateChange(); // お釣りをリセット
+            updateChange();
         }
 
-        // お釣りを計算して更新する関数
+        // お釣り計算
         function updateChange() {
             const change = receivedAmount - totalAmount;
             document.getElementById("changeAmount").innerText = "¥" + (change >= 0 ? change : 0);
         }
 
-        // 販売データを更新して表示
+        // 販売データリスト更新
         function updateSoldItemsList() {
             const soldItemsList = document.getElementById("soldItemsList");
-            soldItemsList.innerHTML = ""; // リストをクリア
+            soldItemsList.innerHTML = "";
 
             for (const [productId, quantity] of Object.entries(soldItems)) {
                 if (quantity > 0) {
@@ -60,20 +221,18 @@
         }
 
         function prepareFormData(event) {
-            // 受領金額が合計金額を下回っている場合、警告を表示し、送信を中止
             if (receivedAmount < totalAmount) {
-                alert("受領金額が合計金額を下回っています。再度確認してください。");
-                event.preventDefault(); // フォーム送信を中止
-                return; // 関数の処理をここで終了する
+                alert("受領金額が合計金額を下回っています。");
+                event.preventDefault();
+                return;
             }
 
-            // 以下の処理は正常時のみ実行される
             document.getElementById("formTotalAmount").value = totalAmount;
             document.getElementById("formReceivedAmount").value = receivedAmount;
             document.getElementById("formChangeAmount").value = Math.max(receivedAmount - totalAmount, 0);
 
             const itemsContainer = document.getElementById("formSoldItems");
-            itemsContainer.innerHTML = ""; // リセット
+            itemsContainer.innerHTML = "";
 
             Object.entries(soldItems).forEach(([productId, quantity]) => {
                 if (quantity > 0) {
@@ -85,69 +244,55 @@
                 }
             });
         }
-
     </script>
 </head>
-
 <body>
-<h1>取引記録システム</h1>
+<!-- メイン画面に戻るボタン -->
+<a th:href="@{/main}" class="back-button">&larr; メイン画面に戻る</a>
 
-<!-- 商品リスト -->
-<h2>商品一覧</h2>
-<div th:if="${productKey}">
-    <ul>
-        <!-- 商品ごとにボタンを生成 -->
-        <li th:each="product : ${productKey}">
-            <button type="button"
-                    th:onclick="'addToTotal(' + ${product.productId} + ',' + ${product.productValue} + ')'"
-                    th:text="${product.productName} + ' (¥' + ${product.productValue} + ')'" >
-            </button>
-        </li>
-    </ul>
-</div>
+<div class="container">
+    <h1>取引記録システム</h1>
 
-<!-- 合計金額表示 -->
-<h2>合計金額</h2>
-<p id="totalAmount">¥0</p>
-
-<!-- 受領金額入力 -->
-<h2>受領金額</h2>
-<div>
-    <p id="receivedAmount">¥0</p>
-    <div>
-        <!-- 0～9のボタン -->
-        <button type="button" onclick="addToReceived(1)">1</button>
-        <button type="button" onclick="addToReceived(2)">2</button>
-        <button type="button" onclick="addToReceived(3)">3</button>
-        <button type="button" onclick="addToReceived(4)">4</button>
-        <button type="button" onclick="addToReceived(5)">5</button>
-        <button type="button" onclick="addToReceived(6)">6</button>
-        <button type="button" onclick="addToReceived(7)">7</button>
-        <button type="button" onclick="addToReceived(8)">8</button>
-        <button type="button" onclick="addToReceived(9)">9</button>
-        <button type="button" onclick="addToReceived(0)">0</button>
+    <h2>商品一覧</h2>
+    <div class="product-buttons" th:if="${productKey}">
+        <button th:each="product : ${productKey}" type="button"
+                th:onclick="'addToTotal(' + ${product.productId} + ',' + ${product.productValue} + ')'"
+                th:text="${product.productName} + ' (¥' + ${product.productValue} + ')'">
+        </button>
     </div>
-    <button type="button" onclick="clearReceived()">クリア</button>
+
+    <h2>合計金額</h2>
+    <p id="totalAmount" class="amount-display">&yen;0</p>
+
+    <h2>受領金額</h2>
+    <p id="receivedAmount" class="amount-display">&yen;0</p>
+    <div class="input-buttons">
+        <button onclick="addToReceived(1)">1</button>
+        <button onclick="addToReceived(2)">2</button>
+        <button onclick="addToReceived(3)">3</button>
+        <button onclick="addToReceived(4)">4</button>
+        <button onclick="addToReceived(5)">5</button>
+        <button onclick="addToReceived(6)">6</button>
+        <button onclick="addToReceived(7)">7</button>
+        <button onclick="addToReceived(8)">8</button>
+        <button onclick="addToReceived(9)">9</button>
+        <button onclick="addToReceived(0)">0</button>
+        <button class="clear-button" onclick="clearReceived()">クリア</button>
+    </div>
+
+    <h2>お釣り</h2>
+    <p id="changeAmount" class="amount-display">&yen;0</p>
+
+    <h2>販売データ</h2>
+    <ul id="soldItemsList"></ul>
+
+    <form id="transactionForm" th:action="@{/main/recordSale}" method="post">
+        <input type="hidden" id="formTotalAmount" name="totalAmount" />
+        <input type="hidden" id="formReceivedAmount" name="receivedAmount" />
+        <input type="hidden" id="formChangeAmount" name="changeAmount" />
+        <div id="formSoldItems"></div>
+        <button class="register-button" type="submit" onclick="prepareFormData(event)">登録</button>
+    </form>
 </div>
-
-<!-- お釣り表示 -->
-<h2>お釣り</h2>
-<p id="changeAmount">¥0</p>
-
-<!-- 販売データ表示 -->
-<h2>販売データ</h2>
-<ul id="soldItemsList"></ul>
-
-<!-- 登録ボタン -->
-<form id="transactionForm" th:action="@{/main/recordSale}" method="post">
-    <!-- 隠しフィールドで送信するデータ -->
-    <input type="hidden" id="formTotalAmount" name="totalAmount" />
-    <input type="hidden" id="formReceivedAmount" name="receivedAmount" />
-    <input type="hidden" id="formChangeAmount" name="changeAmount" />
-    <div id="formSoldItems"></div>
-
-    <button type="submit" onclick="prepareFormData(event)">登録</button>
-</form>
-
 </body>
 </html>

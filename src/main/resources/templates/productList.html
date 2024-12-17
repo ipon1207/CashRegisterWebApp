@@ -2,69 +2,148 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>PRODUCT LIST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            position: relative; /* 親要素に対して相対位置を設定 */
+            min-height: 100vh; /* 最低でも画面全体の高さ */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+        form {
+            display: inline;
+        }
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .edit-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .edit-button:hover {
+            background-color: #0056b3;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .delete-button:hover {
+            background-color: #a71d2a;
+        }
+
+        /* メイン画面に戻るボタン（左下） */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+        /* 新規登録ボタン（右下） */
+        .register-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            table th, table td {
+                padding: 8px;
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .back-button, .register-button {
+                bottom: 15px;
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            table {
+                font-size: 12px;
+            }
+
+            .edit-button, .delete-button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <script>
+        function confirmDelete() {
+            return confirm('本当に削除しますか？');
+        }
+    </script>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-        margin: 0;
-        padding: 20px;
-    }
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        background: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    table th, table td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-    table th {
-        background-color: #007bff;
-        color: white;
-    }
-    table tr:hover {
-        background-color: #f1f1f1;
-    }
-    form {
-        display: inline;
-    }
-    button {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-    .edit-button {
-        background-color: #007bff;
-        color: #fff;
-    }
-    .edit-button:hover {
-        background-color: #0056b3;
-    }
-    .delete-button {
-        background-color: #dc3545;
-        color: #fff;
-    }
-    .delete-button:hover {
-        background-color: #a71d2a;
-    }
-</style>
-<script>
-    function confirmDelete() {
-        return confirm('本当に削除しますか？');
-    }
-</script>
 <body>
+<!-- メイン画面に戻るボタン -->
+<a th:href="@{/main}" class="back-button">&larr; メイン画面に戻る</a>
+
 <h1>商品一覧</h1>
 <div th:if="${productList}">
     <table>
@@ -98,8 +177,9 @@
 <div th:if="${#lists.isEmpty(productList)}">
     <p>データがありません。</p>
 </div>
+<!-- 商品新規登録ボタン -->
 <form method="get" th:action="@{/main/productList/viewRegister}">
-    <button type="submit">商品新規登録</button>
+    <button type="submit" class="register-button">商品新規登録</button>
 </form>
 </body>
 </html>

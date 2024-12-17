@@ -1,15 +1,88 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ホーム</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- IE対応 -->
+    <title>ホーム</title>
+    <style>
+        /* 全体のリセット */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <body>
-        <h1>index.html</h1>
-        <a href="./main.html" th:href="@{/main}">ユーザページ</a>
-    </body>
+        /* bodyのスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center; /* 水平方向中央揃え */
+            align-items: center; /* 垂直方向中央揃え */
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* コンテナ */
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        /* 見出し */
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        /* リンクスタイル */
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 12px 24px; /* スマホでもタップしやすくする */
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        /* スマホ向けの追加スタイル */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            a {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>ホーム画面</h1>
+    <a href="./main.html" th:href="@{/main}">ユーザーページへ移動</a>
+</div>
+</body>
 
 </html>

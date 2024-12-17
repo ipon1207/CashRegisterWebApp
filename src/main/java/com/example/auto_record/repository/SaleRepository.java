@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Integer> {
@@ -13,4 +14,6 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
     public Sale findBySaleAt(LocalDateTime searchTime);
     // saleId で1件検索
     public Sale findBySaleId(Integer saleId);
+    // groupId で合致するものを全件取得
+    public List<Sale> findByGroupId(Integer groupId);
 }

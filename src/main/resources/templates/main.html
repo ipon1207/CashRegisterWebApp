@@ -98,6 +98,11 @@
         <button type="submit">売り上げ登録</button>
     </form>
 
+    <!-- 取引履歴 -->
+    <form method="get" th:action="@{/main/viewSaleList}">
+        <button type="submit">取引記録</button>
+    </form>
+
     <!-- 管理者ページへのリンク -->
     <a sec:authorize="hasAuthority('ROLE_ADMIN')"
        href="./admin.html"

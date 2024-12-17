@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取引履歴</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+        form {
+            display: inline;
+        }
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .edit-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .edit-button:hover {
+            background-color: #0056b3;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .delete-button:hover {
+            background-color: #a71d2a;
+        }
+
+        /* メイン画面に戻るボタン */
+        .back-button {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            table th, table td {
+                padding: 8px;
+                font-size: 14px; /* 少し大きくして見やすくする */
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .back-button {
+                font-size: 14px; /* ボタンのフォントサイズ調整 */
+                padding: 8px 12px; /* ボタンのパディング調整 */
+            }
+
+            h1 {
+                font-size: 20px; /* 見出しサイズ調整 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            table {
+                font-size: 12px;
+                overflow-x: auto; /* スクロールできるように */
+            }
+
+            .edit-button, .delete-button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            /* ボタンサイズの調整 */
+            .back-button {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+    <script>
+        function confirmDelete() {
+            return confirm('本当に削除しますか？');
+        }
+    </script>
+</head>
+<body>
+<!-- メイン画面に戻るボタン -->
+<a th:href="@{/admin}" class="back-button">&larr; メイン画面に戻る</a>
+<h1>取引履歴</h1>
+<div th:if="${saleList}">
+    <table>
+        <thead>
+        <tr>
+            <th>取引ID</th>
+            <th>合計金額</th>
+            <th>受領金額</th>
+            <th>お釣り</th>
+            <th>取引日時</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sale : ${saleList}">
+            <td th:text="${sale.saleId}"></td>
+            <td th:text="${sale.totalPrice}"></td>
+            <td th:text="${sale.receivedPrice}"></td>
+            <td th:text="${sale.changePrice}"></td>
+            <td th:text="${sale.saleAt}"></td>
+            <td>
+                <form method="post" th:action="@{/main/saleList/detail}">
+                    <input type="hidden" name="id" th:value="${sale.saleId}" />
+                    <button type="submit" class="edit-button">詳細</button>
+                </form>
+                <form method="post" th:action="@{/admin/saleList/delete}">
+                    <input type="hidden" name="id" th:value="${sale.saleId}" />
+                    <button type="submit" class="delete-button" onclick="return confirmDelete();">削除</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${#lists.isEmpty(saleList)}">
+    <p>データがありません。</p>
+</div>
+</body>
+</html>

@@ -10,8 +10,8 @@ import java.util.List;
 public interface SaleDetailRepository extends JpaRepository<SaleDetail, Integer> {
 
     // saleId に合致するものを全件取得
-    public List<SaleDetail> findBySaleId(Integer saleId);
+    List<SaleDetail> findBySaleId(Integer saleId);
     // saleId に合致するものを全件削除
-    public void deleteBySaleId(Integer saleId);
+    void deleteBySaleId(Integer saleId);
 
 }

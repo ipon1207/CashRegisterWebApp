@@ -11,11 +11,11 @@ import java.util.List;
 public interface SaleRepository extends JpaRepository<Sale, Integer> {
 
     // 登録時間で1件検索
-    public Sale findBySaleAt(LocalDateTime searchTime);
+    Sale findBySaleAt(LocalDateTime searchTime);
     // saleId で1件検索
-    public Sale findBySaleId(Integer saleId);
+    Sale findBySaleId(Integer saleId);
     // groupId で合致するものを全件取得
-    public List<Sale> findByGroupId(Integer groupId);
+    List<Sale> findByGroupId(Integer groupId);
     // saleId で合致するものを削除
-    public void deleteBySaleId(Integer saleId);
+    void deleteBySaleId(Integer saleId);
 }

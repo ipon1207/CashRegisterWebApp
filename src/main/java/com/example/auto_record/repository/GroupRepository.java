@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 public interface GroupRepository extends JpaRepository<Group, Integer> {
 
     // mail で1件取得
-    public Group findByMail(String mail);
+    Group findByMail(String mail);
 
     // groupId で1件取得
-    public Group findByGroupId(Integer groupId);
+    Group findByGroupId(Integer groupId);
 
     // groupId で1件削除
-    public void deleteByGroupId(Integer groupId);
+    void deleteByGroupId(Integer groupId);
 
 }

@@ -70,7 +70,6 @@ public class GroupEditService {
     }
 
     // Group テーブルの1件削除
-    @Transactional
     public void deleteOne(Integer groupId) {
 
         groupRepository.deleteByGroupId(groupId);

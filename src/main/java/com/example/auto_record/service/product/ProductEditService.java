@@ -21,7 +21,7 @@ public class ProductEditService {
         List<Product> result;
 
         // 全件取得の実行
-        result = productRepository.findByGroupId(groupId);
+        result = productRepository.findByGroupIdAndIsDeletedFalse(groupId);
 
         return result;
 
@@ -33,7 +33,7 @@ public class ProductEditService {
         Product result;
 
         // 1件取得の実行
-        result = productRepository.findByProductId(productId);
+        result = productRepository.findByProductIdAndIsDeletedFalse(productId);
 
         return result;
     }
@@ -43,7 +43,7 @@ public class ProductEditService {
 
         Product exitingProduct;
 
-        exitingProduct = productRepository.findByProductId(product.getProductId());
+        exitingProduct = productRepository.findByProductIdAndIsDeletedFalse(product.getProductId());
         exitingProduct.setProductName(product.getProductName());
         exitingProduct.setProductValue(product.getProductValue());
         exitingProduct.setCreatedAt(LocalDateTime.now());
@@ -53,10 +53,9 @@ public class ProductEditService {
     }
 
     // products のデータを削除
-    @Transactional
     public void deleteOne(Integer productId) {
 
-        productRepository.deleteByProductId(productId);
+        productRepository.logicallyDeleteByProductId(productId);
 
     }
 

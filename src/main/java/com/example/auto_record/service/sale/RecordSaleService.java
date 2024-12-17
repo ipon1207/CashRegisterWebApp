@@ -29,7 +29,7 @@ public class RecordSaleService {
 
         List<Product> result;
 
-        result = productRepository.findByGroupId(groupId);
+        result = productRepository.findByGroupIdAndIsDeletedFalse(groupId);
 
         return result;
 

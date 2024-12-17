@@ -32,7 +32,7 @@ public class ProductRegisterService {
 
         List<Product> result;
 
-        result = productRepository.findByGroupId(groupId);
+        result = productRepository.findByGroupIdAndIsDeletedFalse(groupId);
 
         return result;
 

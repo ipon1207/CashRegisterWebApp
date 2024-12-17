@@ -30,4 +30,7 @@ public class Product {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false; // 論理削除フラグ
+    
 }

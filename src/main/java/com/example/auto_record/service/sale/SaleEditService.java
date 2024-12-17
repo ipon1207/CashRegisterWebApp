@@ -57,7 +57,6 @@ public class SaleEditService {
     }
 
     // sale と sale_details から saleId に合致するものを削除
-    @Transactional
     public void deleteSale(Integer saleId) {
 
         saleRepository.deleteBySaleId(saleId);

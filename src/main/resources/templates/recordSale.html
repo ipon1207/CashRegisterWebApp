@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>取引記録システム</title>
+    <script>
+        // 初期化
+        let totalAmount = 0; // 合計金額
+        let receivedAmount = 0; // 受領金額
+        const soldItems = {}; // 商品の販売データ (商品ID: 個数)
+
+        // 合計金額を更新する関数
+        function addToTotal(productId, price) {
+            totalAmount += price;
+            document.getElementById("totalAmount").innerText = "¥" + totalAmount;
+
+            // 販売データの更新
+            if (!soldItems[productId]) {
+                soldItems[productId] = 0;
+            }
+            soldItems[productId]++;
+            updateSoldItemsList();
+
+            updateChange(); // お釣りを更新
+        }
+
+        // 受領金額を更新する関数
+        function addToReceived(digit) {
+            receivedAmount = receivedAmount * 10 + digit; // 数字を追加
+            document.getElementById("receivedAmount").innerText = "¥" + receivedAmount;
+            updateChange(); // お釣りを更新
+        }
+
+        // 受領金額をクリアする関数
+        function clearReceived() {
+            receivedAmount = 0;
+            document.getElementById("receivedAmount").innerText = "¥0";
+            updateChange(); // お釣りをリセット
+        }
+
+        // お釣りを計算して更新する関数
+        function updateChange() {
+            const change = receivedAmount - totalAmount;
+            document.getElementById("changeAmount").innerText = "¥" + (change >= 0 ? change : 0);
+        }
+
+        // 販売データを更新して表示
+        function updateSoldItemsList() {
+            const soldItemsList = document.getElementById("soldItemsList");
+            soldItemsList.innerHTML = ""; // リストをクリア
+
+            for (const [productId, quantity] of Object.entries(soldItems)) {
+                if (quantity > 0) {
+                    const listItem = document.createElement("li");
+                    listItem.innerText = `商品ID: ${productId}, 数量: ${quantity}`;
+                    soldItemsList.appendChild(listItem);
+                }
+            }
+        }
+
+        function prepareFormData(event) {
+            // 受領金額が合計金額を下回っている場合、警告を表示し、送信を中止
+            if (receivedAmount < totalAmount) {
+                alert("受領金額が合計金額を下回っています。再度確認してください。");
+                event.preventDefault(); // フォーム送信を中止
+                return; // 関数の処理をここで終了する
+            }
+
+            // 以下の処理は正常時のみ実行される
+            document.getElementById("formTotalAmount").value = totalAmount;
+            document.getElementById("formReceivedAmount").value = receivedAmount;
+            document.getElementById("formChangeAmount").value = Math.max(receivedAmount - totalAmount, 0);
+
+            const itemsContainer = document.getElementById("formSoldItems");
+            itemsContainer.innerHTML = ""; // リセット
+
+            Object.entries(soldItems).forEach(([productId, quantity]) => {
+                if (quantity > 0) {
+                    const input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = `soldItems[${productId}]`;
+                    input.value = quantity;
+                    itemsContainer.appendChild(input);
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+<h1>取引記録システム</h1>
+
+<!-- 商品リスト -->
+<h2>商品一覧</h2>
+<div th:if="${productKey}">
+    <ul>
+        <!-- 商品ごとにボタンを生成 -->
+        <li th:each="product : ${productKey}">
+            <button type="button"
+                    th:onclick="'addToTotal(' + ${product.productId} + ',' + ${product.productValue} + ')'"
+                    th:text="${product.productName} + ' (¥' + ${product.productValue} + ')'" >
+            </button>
+        </li>
+    </ul>
+</div>
+
+<!-- 合計金額表示 -->
+<h2>合計金額</h2>
+<p id="totalAmount">¥0</p>
+
+<!-- 受領金額入力 -->
+<h2>受領金額</h2>
+<div>
+    <p id="receivedAmount">¥0</p>
+    <div>
+        <!-- 0～9のボタン -->
+        <button type="button" onclick="addToReceived(1)">1</button>
+        <button type="button" onclick="addToReceived(2)">2</button>
+        <button type="button" onclick="addToReceived(3)">3</button>
+        <button type="button" onclick="addToReceived(4)">4</button>
+        <button type="button" onclick="addToReceived(5)">5</button>
+        <button type="button" onclick="addToReceived(6)">6</button>
+        <button type="button" onclick="addToReceived(7)">7</button>
+        <button type="button" onclick="addToReceived(8)">8</button>
+        <button type="button" onclick="addToReceived(9)">9</button>
+        <button type="button" onclick="addToReceived(0)">0</button>
+    </div>
+    <button type="button" onclick="clearReceived()">クリア</button>
+</div>
+
+<!-- お釣り表示 -->
+<h2>お釣り</h2>
+<p id="changeAmount">¥0</p>
+
+<!-- 販売データ表示 -->
+<h2>販売データ</h2>
+<ul id="soldItemsList"></ul>
+
+<!-- 登録ボタン -->
+<form id="transactionForm" th:action="@{/main/recordSale}" method="post">
+    <!-- 隠しフィールドで送信するデータ -->
+    <input type="hidden" id="formTotalAmount" name="totalAmount" />
+    <input type="hidden" id="formReceivedAmount" name="receivedAmount" />
+    <input type="hidden" id="formChangeAmount" name="changeAmount" />
+    <div id="formSoldItems"></div>
+
+    <button type="submit" onclick="prepareFormData(event)">登録</button>
+</form>
+
+</body>
+</html>

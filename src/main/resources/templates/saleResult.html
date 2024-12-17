@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>取引確認</title>
+</head>
+<body>
+<h1>取引確認</h1>
+
+<p>合計金額: ¥<span th:text="${saleResult.totalPrice}"></span></p>
+<p>受領金額: ¥<span th:text="${saleResult.receivedPrice}"></span></p>
+<p>お釣り: ¥<span th:text="${saleResult.changePrice}"></span></p>
+
+<form method="get" th:action="@{/main/viewRecordSale}">
+    <button type="submit">売り上げ登録</button>
+</form>
+
+</body>
+</html>

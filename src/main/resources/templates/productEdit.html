@@ -11,10 +11,12 @@
             margin: 0;
             padding: 20px;
         }
+
         h1 {
             text-align: center;
             color: #333;
         }
+
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -23,12 +25,14 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
             color: #555;
         }
+
         input[type='text'],
         input[type='email'],
         input[type='password'] {
@@ -40,9 +44,11 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         input[type='radio'] {
             margin-right: 5px;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -53,22 +59,24 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #0056b3;
         }
 
-        /* 左上ボタンスタイル */
+        /* 左下ボタンスタイル */
         .back-button {
             position: fixed;
-            top: 10px;
-            left: 10px;
+            bottom: 10px; /* 画面下からの位置 */
+            left: 10px;   /* 画面左からの位置 */
             background-color: #28a745;
             color: white;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 4px;
             text-decoration: none;
             font-size: 14px;
             transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .back-button:hover {
@@ -96,6 +104,11 @@
             h1 {
                 font-size: 20px;
             }
+
+            .back-button {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -117,6 +130,13 @@
 
             h1 {
                 font-size: 18px;
+            }
+
+            .back-button {
+                font-size: 12px;
+                padding: 8px 12px;
+                bottom: 5px;
+                left: 5px;
             }
         }
     </style>

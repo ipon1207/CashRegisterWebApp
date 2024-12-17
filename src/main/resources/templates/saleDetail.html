@@ -1,26 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
-    <title>Sales Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取引詳細</title>
+    <style>
+        /* 全体のスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* テーブルスタイル */
+        .table-container {
+            overflow-x: auto; /* 小さい画面でスクロール可能にする */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 取引履歴に戻るボタン */
+        .back-button {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>Sales Details</h1>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>Sale ID</th>
-        <th>Product Name</th>
-        <th>Quantity</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="saleProduct : ${saleProductList}">
-        <td th:text="${saleProduct.saleId}"></td>
-        <td th:text="${saleProduct.productName}"></td>
-        <td th:text="${saleProduct.quantity}"></td>
-    </tr>
-    </tbody>
-</table>
+<!-- 取引履歴に戻るボタン -->
+<a th:href="@{/main/viewSaleList}" class="back-button">&larr; 取引履歴に戻る</a>
+<h1>取引詳細</h1>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Sale ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="saleProduct : ${saleProductList}">
+            <td th:text="${saleProduct.saleId}"></td>
+            <td th:text="${saleProduct.productName}"></td>
+            <td th:text="${saleProduct.quantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

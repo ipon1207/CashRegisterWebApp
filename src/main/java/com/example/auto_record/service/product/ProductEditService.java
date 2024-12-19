@@ -47,7 +47,7 @@ public class ProductEditService {
         exitingProduct.setProductName(product.getProductName());
         exitingProduct.setProductValue(product.getProductValue());
         // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm:ss");
         exitingProduct.setCreatedAt(LocalDateTime.now().format(formatter));
         // データの更新を実行
         productRepository.save(exitingProduct);

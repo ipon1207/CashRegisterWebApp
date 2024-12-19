@@ -67,7 +67,7 @@ public class GroupEditService {
         existingGroup.setRole(group.getRole());
 
         // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm:ss");
         existingGroup.setCreatedAt(LocalDateTime.now().format(formatter));
 
         // データを更新

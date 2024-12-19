@@ -37,7 +37,7 @@ public class GroupRegisterController {
         // 入力された password をハッシュ化
         registerGroup.setPassword(encoder.encode(registerGroup.getPassword()));
         // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm:ss");
         registerGroup.setCreatedAt(LocalDateTime.now().format(formatter));
 
         // DBに追加

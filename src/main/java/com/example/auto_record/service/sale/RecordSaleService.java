@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -39,7 +40,8 @@ public class RecordSaleService {
     public Integer insertSale(Integer groupId, Integer totalPrice, Integer receivedPrice, Integer changePrice) {
 
         Sale registerSale = new Sale();
-        LocalDateTime searchTime = LocalDateTime.now();
+        // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
+        String searchTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm:ss"));
         Sale result;
         Integer saleId;
 

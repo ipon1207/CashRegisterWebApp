@@ -22,7 +22,7 @@ public class ProductRegisterService {
         product.setGroupId(groupId);
         product.setGroupName(groupName);
         // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm:ss");
         product.setCreatedAt(LocalDateTime.now().format(formatter));
 
         // product テーブルを更新

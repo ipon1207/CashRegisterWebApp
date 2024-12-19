@@ -3,8 +3,6 @@ package com.example.auto_record.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Entity
 @Table(name = "sales")
@@ -28,6 +26,6 @@ public class Sale {
     private Integer changePrice;
 
     @Column(name = "sale_at", nullable = false)
-    private LocalDateTime saleAt;
+    private String saleAt;
 
 }

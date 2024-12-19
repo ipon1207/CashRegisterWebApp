@@ -84,4 +84,144 @@ public class SaleEditController {
         return "saleList";
     }
 
+    // 取引IDで昇順並び替え
+    @GetMapping("/main/saleList/sortId")
+    public String sortId(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getSaleId));
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 取引IDで降順並び替え
+    @GetMapping("/main/saleList/sortIdInv")
+    public String sortIdInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getSaleId).reversed());
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 合計金額で昇順並び替え
+    @GetMapping("/main/saleList/sortTotal")
+    public String sortTotal(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getTotalPrice));
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 合計金額で降順並び替え
+    @GetMapping("/main/saleList/sortTotalInv")
+    public String sortTotalInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getTotalPrice).reversed());
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 受領金額で昇順並び替え
+    @GetMapping("/main/saleList/sortReceived")
+    public String sortReceived(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getReceivedPrice));
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 受領金額で降順並び替え
+    @GetMapping("/main/saleList/sortReceivedInv")
+    public String sortReceivedInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getReceivedPrice).reversed());
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // お釣りで昇順並び替え
+    @GetMapping("/main/saleList/sortChange")
+    public String sortChange(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getChangePrice));
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // お釣りで降順並び替え
+    @GetMapping("/main/saleList/sortChangeInv")
+    public String sortChangeInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getChangePrice).reversed());
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 取引時間で昇順並び替え
+    @GetMapping("/main/saleList/sortAt")
+    public String sortAt(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getSaleAt));
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
+    // 取引時間で降順並び替え
+    @GetMapping("/main/saleList/sortAtInv")
+    public String sortAtInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Sale> saleList;
+
+        // 商品データの取得
+        saleList = saleEditService.searchSale(groupPrincipal.getGroupId());
+        saleList.sort(Comparator.comparing(Sale::getSaleAt).reversed());
+
+        model.addAttribute("saleList", saleList);
+        return "saleList";
+    }
+
 }

@@ -135,11 +135,51 @@
     <table>
         <thead>
         <tr>
-            <th>取引ID</th>
-            <th>合計金額</th>
-            <th>受領金額</th>
-            <th>お釣り</th>
-            <th>取引日時</th>
+            <th>
+                取引ID
+                <form method="get" th:action="@{/main/saleList/sortId}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/saleList/sortIdInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                合計金額
+                <form method="get" th:action="@{/main/saleList/sortTotal}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/saleList/sortTotalInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                受領金額
+                <form method="get" th:action="@{/main/saleList/sortReceived}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/saleList/sortReceivedInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                お釣り
+                <form method="get" th:action="@{/main/saleList/sortChange}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/saleList/sortChangeInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                取引日時
+                <form method="get" th:action="@{/main/saleList/sortAt}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/saleList/sortAtInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
             <th>操作</th>
         </tr>
         </thead>

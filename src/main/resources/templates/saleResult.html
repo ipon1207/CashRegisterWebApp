@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>取引確認</title>
+    <title>注文確認</title>
     <style>
         /* 全体のスタイル */
         body {
@@ -86,14 +86,14 @@
 </head>
 <body>
 <div class="container">
-    <h1>取引確認</h1>
+    <h1>注文確認</h1>
 
     <p>合計金額: &yen;<span th:text="${saleResult.totalPrice}"></span></p>
     <p>受領金額: &yen;<span th:text="${saleResult.receivedPrice}"></span></p>
     <p>お釣り: &yen;<span th:text="${saleResult.changePrice}"></span></p>
 
     <form method="get" th:action="@{/main/viewRecordSale}">
-        <button type="submit">売り上げ登録</button>
+        <button type="submit">レジへ</button>
     </form>
 </div>
 </body>

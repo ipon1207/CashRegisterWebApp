@@ -4,9 +4,9 @@ import com.example.auto_record.model.Product;
 import com.example.auto_record.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -46,7 +46,9 @@ public class ProductEditService {
         exitingProduct = productRepository.findByProductIdAndIsDeletedFalse(product.getProductId());
         exitingProduct.setProductName(product.getProductName());
         exitingProduct.setProductValue(product.getProductValue());
-        exitingProduct.setCreatedAt(LocalDateTime.now());
+        // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        exitingProduct.setCreatedAt(LocalDateTime.now().format(formatter));
         // データの更新を実行
         productRepository.save(exitingProduct);
 

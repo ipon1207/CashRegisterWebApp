@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -20,7 +21,9 @@ public class ProductRegisterService {
         // フォームで登録されないデータをセット
         product.setGroupId(groupId);
         product.setGroupName(groupName);
-        product.setCreatedAt(LocalDateTime.now());
+        // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        product.setCreatedAt(LocalDateTime.now().format(formatter));
 
         // product テーブルを更新
         productRepository.save(product);

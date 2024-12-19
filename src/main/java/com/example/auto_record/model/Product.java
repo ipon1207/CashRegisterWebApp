@@ -3,8 +3,6 @@ package com.example.auto_record.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Entity
 @Table(name = "products")
@@ -27,10 +25,10 @@ public class Product {
     @Column(name = "group_name")
     private String groupName;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted = false; // 論理削除フラグ
+
+    @Column(name = "created_at")
+    private String createdAt;
     
 }

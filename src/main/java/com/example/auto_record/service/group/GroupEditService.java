@@ -5,9 +5,9 @@ import com.example.auto_record.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -57,16 +57,21 @@ public class GroupEditService {
 
         Group existingGroup;
 
-        // 既存のデータを上書き
+        // 既存のデータを取得
         existingGroup = groupRepository.findByGroupId(group.getGroupId());
+
+        // フィールドを更新
         existingGroup.setGroupName(group.getGroupName());
         existingGroup.setMail(group.getMail());
         existingGroup.setPassword(encoder.encode(group.getPassword()));
         existingGroup.setRole(group.getRole());
-        existingGroup.setCreatedAt(LocalDateTime.now());
+
+        // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        existingGroup.setCreatedAt(LocalDateTime.now().format(formatter));
+
         // データを更新
         groupRepository.save(existingGroup);
-
     }
 
     // Group テーブルの1件削除

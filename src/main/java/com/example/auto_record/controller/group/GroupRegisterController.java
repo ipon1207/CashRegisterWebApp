@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /* Group の新規登録 Controller */
 @Controller
@@ -35,8 +36,9 @@ public class GroupRegisterController {
 
         // 入力された password をハッシュ化
         registerGroup.setPassword(encoder.encode(registerGroup.getPassword()));
-        // createdAt を set
-        registerGroup.setCreatedAt(LocalDateTime.now());
+        // LocalDateTimeをフォーマットしてString型のcreatedAtに設定
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH:mm");
+        registerGroup.setCreatedAt(LocalDateTime.now().format(formatter));
 
         // DBに追加
         groupRegisterService.register(registerGroup);

@@ -3,8 +3,6 @@ package com.example.auto_record.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Entity
 @Table(name = "groups")
@@ -27,6 +25,6 @@ public class Group {
     @Column(name = "role")
     private String role;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "created_at")
+    private String createdAt;
 }

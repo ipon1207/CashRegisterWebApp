@@ -166,6 +166,11 @@
                 padding: 12px 16px;
             }
         }
+
+        /* 赤字スタイル */
+        .negative-change {
+            color: red;
+        }
     </style>
     <script>
         // 初期化
@@ -203,7 +208,15 @@
         // お釣り計算
         function updateChange() {
             const change = receivedAmount - totalAmount;
-            document.getElementById("changeAmount").innerText = "¥" + (change >= 0 ? change : 0);
+            const changeElement = document.getElementById("changeAmount");
+            changeElement.innerText = "¥" + change;
+
+            // 受領金額が合計金額を下回る場合に赤字にする
+            if (change < 0) {
+                changeElement.classList.add("negative-change");
+            } else {
+                changeElement.classList.remove("negative-change");
+            }
         }
 
         // 販売データリスト更新

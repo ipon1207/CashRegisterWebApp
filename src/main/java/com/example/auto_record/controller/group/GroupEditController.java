@@ -80,4 +80,117 @@ public class GroupEditController {
 
     }
 
+    // 団体名で昇順並び替え
+    @GetMapping("/admin/groupList/sortName")
+    public String sortName(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getGroupName));
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // 団体名で降順並び替え
+    @GetMapping("/admin/groupList/sortNameInv")
+    public String sortNameInv(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getGroupName).reversed());
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // メールアドレスで昇順並び替え
+    @GetMapping("/admin/groupList/sortMail")
+    public String sortMail(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getMail));
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // メールアドレスで降順並び替え
+    @GetMapping("/admin/groupList/sortMailInv")
+    public String sortMailInv(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getMail).reversed());
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // 権限で昇順並び替え
+    @GetMapping("/admin/groupList/sortRole")
+    public String sortRole(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getRole));
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // 権限で降順並び替え
+    @GetMapping("/admin/groupList/sortRoleInv")
+    public String sortRoleInv(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getRole).reversed());
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // 作成更新日時で昇順並び替え
+    @GetMapping("/admin/groupList/sortAt")
+    public String sortAt(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getCreatedAt));
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+    // メールアドレスで降順並び替え
+    @GetMapping("/admin/groupList/sortAtInv")
+    public String sortAtInv(Model model) {
+
+        List<Group> groupList;
+
+        // 商品データの取得
+        groupList = groupEditService.searchAll();
+        groupList.sort(Comparator.comparing(Group::getCreatedAt).reversed());
+
+        model.addAttribute("groupList", groupList);
+        return "groupList";
+    }
+
+
 }

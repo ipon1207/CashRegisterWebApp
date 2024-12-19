@@ -135,10 +135,42 @@
     <table>
         <thead>
         <tr>
-            <th>団体名</th>
-            <th>メールアドレス</th>
-            <th>権限</th>
-            <th>作成/更新日時</th>
+            <th>
+                団体名
+                <form method="get" th:action="@{/admin/groupList/sortName}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/admin/groupList/sortNameInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                メールアドレス
+                <form method="get" th:action="@{/admin/groupList/sortMail}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/admin/groupList/sortMailInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                権限
+                <form method="get" th:action="@{/admin/groupList/sortRole}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/admin/groupList/sortRoleInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                作成/更新日時
+                <form method="get" th:action="@{/admin/groupList/sortAt}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/admin/groupList/sortAtInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
             <th>操作</th>
         </tr>
         </thead>

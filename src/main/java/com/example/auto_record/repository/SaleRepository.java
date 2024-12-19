@@ -3,6 +3,7 @@ package com.example.auto_record.repository;
 import com.example.auto_record.model.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,5 +18,6 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
     // groupId で合致するものを全件取得
     List<Sale> findByGroupId(Integer groupId);
     // saleId で合致するものを削除
+    @Transactional
     void deleteBySaleId(Integer saleId);
 }

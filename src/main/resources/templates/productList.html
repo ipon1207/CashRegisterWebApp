@@ -149,9 +149,33 @@
     <table>
         <thead>
         <tr>
-            <th>商品名</th>
-            <th>商品価格</th>
-            <th>登録日時</th>
+            <th>
+                商品名
+                <form method="get" th:action="@{/main/productList/sortName}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/productList/sortNameInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                商品価格
+                <form method="get" th:action="@{/main/productList/sortValue}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/productList/sortValueInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
+            <th>
+                登録日時
+                <form method="get" th:action="@{/main/productList/sortAt}">
+                    <button type="submit">▲</button>
+                </form>
+                <form method="get" th:action="@{/main/productList/sortAtInv}">
+                    <button type="submit">▼</button>
+                </form>
+            </th>
             <th>操作</th>
         </tr>
         </thead>

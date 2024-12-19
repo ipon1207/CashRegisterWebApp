@@ -27,10 +27,6 @@ public class ProductEditController {
     // ログイン済みグループの情報を取得
     public String getProductList(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model){
 
-        if (groupPrincipal == null) {
-            return "Not logged in";
-        }
-
         List<Product> productList;
 
         // ログイングループの groupId に合致する商品を全件取得
@@ -88,6 +84,88 @@ public class ProductEditController {
 
     }
 
+    // 商品名で昇順並び替え
+    @GetMapping("/main/productList/sortName")
+    public String sortName(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
 
+        List<Product> productList;
+
+        // 商品データの取得
+        productList = productEditService.searchProducts(groupPrincipal.getGroupId());
+        productList.sort(Comparator.comparing(Product::getProductName));
+
+        model.addAttribute("productList", productList);
+        return "productList";
+    }
+
+    // 商品名で降順並び替え
+    @GetMapping("/main/productList/sortNameInv")
+    public String sortNameInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Product> productList;
+
+        // 商品データの取得
+        productList = productEditService.searchProducts(groupPrincipal.getGroupId());
+        productList.sort(Comparator.comparing(Product::getProductValue).reversed());
+
+        model.addAttribute("productList", productList);
+        return "productList";
+    }
+
+    // 商品価格で昇順並び替え
+    @GetMapping("/main/productList/sortValue")
+    public String sortValue(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Product> productList;
+
+        // 商品データの取得
+        productList = productEditService.searchProducts(groupPrincipal.getGroupId());
+        productList.sort(Comparator.comparing(Product::getProductValue));
+
+        model.addAttribute("productList", productList);
+        return "productList";
+    }
+
+    // 商品価格で降順並び替え
+    @GetMapping("/main/productList/sortValueInv")
+    public String sortValueInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Product> productList;
+
+        // 商品データの取得
+        productList = productEditService.searchProducts(groupPrincipal.getGroupId());
+        productList.sort(Comparator.comparing(Product::getProductValue).reversed());
+
+        model.addAttribute("productList", productList);
+        return "productList";
+    }
+
+    // 作成更新で昇順並び替え
+    @GetMapping("/main/productList/sortAt")
+    public String sortAt(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Product> productList;
+
+        // 商品データの取得
+        productList = productEditService.searchProducts(groupPrincipal.getGroupId());
+        productList.sort(Comparator.comparing(Product::getCreatedAt));
+
+        model.addAttribute("productList", productList);
+        return "productList";
+    }
+
+    // 作成更新日時で降順並び替え
+    @GetMapping("/main/productList/sortAtInv")
+    public String sortAtInv(@AuthenticationPrincipal GroupPrincipal groupPrincipal, Model model) {
+
+        List<Product> productList;
+
+        // 商品データの取得
+        productList = productEditService.searchProducts(groupPrincipal.getGroupId());
+        productList.sort(Comparator.comparing(Product::getCreatedAt).reversed());
+
+        model.addAttribute("productList", productList);
+        return "productList";
+    }
 
 }
